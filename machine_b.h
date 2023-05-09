@@ -4,11 +4,11 @@
 #include "machine.h"
 
 class MachineB : public Machine{
-private:
+
+public:
     //constructor
     using Machine::Machine;
 
-public:
     virtual void tick() override;
 };
 

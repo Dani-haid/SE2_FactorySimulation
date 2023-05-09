@@ -6,23 +6,28 @@ using namespace std;
 
 //forward declaration
 class Factory;
+class Product;
 
 class Machine {
 protected:
+    Factory* parent;
 
+public:
     //using default constructor
+    //constructor
+    Machine(Factory* parent) : parent(parent){};
+
 
     //destructor
     ~Machine(){
         cout << "Destructor Machine " << endl;
     };
 
-public:
     virtual void tick() = 0;
 
     void setFactory(Factory* f);
 
-    void createProduct();
+    void createProduct(int type);
 };
 
 

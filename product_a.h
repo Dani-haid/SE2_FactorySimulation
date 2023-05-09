@@ -5,10 +5,16 @@
 
 class ProductA : public Product{
 private:
-    //constructor
-    using Product::Product;
+    int type;
 
 public:
+    //constructor
+    ProductA(){
+        this->type = 1;
+    };
+
+    ProductA(int type): type(type){};
+
     virtual int getType() override;
 };
 

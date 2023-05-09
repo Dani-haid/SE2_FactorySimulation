@@ -4,11 +4,11 @@
 #include "machine.h"
 
 class MachineA : public Machine{
-private:
-    //constructor
-using Machine::Machine;
-
 public:
+    //constructor
+    //using Machine::Machine;
+    MachineA(Factory* parent) : Machine(parent){};
+
     virtual void tick() override;
 };
 
