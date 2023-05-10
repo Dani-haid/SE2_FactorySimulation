@@ -6,7 +6,7 @@ void MachineB:: tick(){
     int tempFailer = getFailureIndex();
     //cout << "tempFailer aktuell: " << tempFailer << endl;
     if(tempFailer == 0){
-        int x = 1, y = 100;
+        //int x = 1, y = 100;
         //int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
         int rand_num = 30;//for testing
         //cout << rand_num << endl;

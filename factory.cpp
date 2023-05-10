@@ -69,7 +69,7 @@ void Factory::run(unsigned iterations){
     maschine2.setFactory(this);
 
 
-    int i = 1;
+    unsigned int i = 1;
     int tempcount = 0;
     while(1){
         cout << "iterations: " << iterations << endl;

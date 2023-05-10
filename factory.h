@@ -30,7 +30,8 @@ for(int i = 0; i < storageProductsA.size(); i++){
 
         for(auto it = machines.begin(); it != machines.end(); it++){
             deleteMachine(it->first);
-        }*/
+        }
+        */
 
 
     };
