@@ -34,12 +34,12 @@ void Factory::addProduct(Product* p){
     if(p->getType() == 1){
         //Produkt in das passende Lager sortieren
         storageProductsA.push_back(p);
-        cout << getProductACount() << endl;
+        getProductACount();
 
     }else if(p->getType() == 2){
         //Produkt in das passende Lager sortieren
         storageProductsB.push_back(p);
-        cout << getProductBCount() << endl;
+        getProductBCount();
     }else{
         throw MachineFailureException("Unbekanntes Produkt.");
     }
@@ -66,7 +66,11 @@ void Factory::run(unsigned iterations){
 
     //addMachine(new MachineA(this));
     //addMachine(new MachineA(this));
-    //addMachine(new MachineB(this));
+
+    MachineB maschine2(this);//bräuchten wir den Parent gar nicht
+    addMachine(&maschine2);
+    maschine2.setFactory(this);
+
 
     int i = 1;
     int tempcount = 0;
@@ -75,13 +79,18 @@ void Factory::run(unsigned iterations){
 
         //map durch iterieren
         for (auto it = machines.begin(); it != machines.end(); it++){
-            it->second->tick();
+            try{
+                it->second->tick();
+            }
+            catch (MachineFailureException& e){
+                cout << e.what() << endl;
+            }
+            catch (MachineExplosionException& e){
+                cout << e.what() << endl;
+                deleteMachine(it->first);
+            }
         }
-
-
-
-
-
+        cout << "-----" << endl;
 
 
         if(iterations == i){
@@ -95,7 +104,7 @@ void Factory::run(unsigned iterations){
             continue;
         }
         iterations--;
-        sleep(5);//sleep for 5 seconds
+        sleep(2);//sleep for 2 seconds
     }
 
 }

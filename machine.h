@@ -11,6 +11,7 @@ class Product;
 class Machine {
 protected:
     Factory* parent;
+    int failureIndex = 0;
 
 public:
     //using default constructor
@@ -28,6 +29,14 @@ public:
     void setFactory(Factory* f);
 
     void createProduct(int type);
+
+    int getFailureIndex() const {
+        return failureIndex;
+    }
+
+    void setFailureIndex(int failureIndex) {
+        this->failureIndex = failureIndex;
+    }
 };
 
 

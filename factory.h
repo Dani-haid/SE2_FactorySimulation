@@ -16,6 +16,25 @@ protected:
     int machineID = 0;
 
 public:
+    ~Factory(){
+        cout << "Destructor Factory" << endl;
+
+       /* cout << storageProductsA.size() << endl;
+
+for(int i = 0; i < storageProductsA.size(); i++){
+    cout << storageProductsA.size() << endl;
+    storageProductsA.erase(storageProductsA.begin()+0);
+    std::cout << i << ", ";
+}
+
+
+        for(auto it = machines.begin(); it != machines.end(); it++){
+            deleteMachine(it->first);
+        }*/
+
+
+    };
+
     unsigned addMachine(Machine* m);
     Machine* getMachine(unsigned id);
     void deleteMachine(unsigned id);

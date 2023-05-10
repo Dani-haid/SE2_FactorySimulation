@@ -4,13 +4,13 @@
 #include "factory.h"
 
 void Machine::createProduct(int type){
-    cout << "neues produkt erzeugen" << endl;
+    //cout << "neues produkt erzeugen" << endl;
     if(type == 1){
+        cout << "Neues Produkt von Maschine A erzeugen." << endl;
         parent->addProduct(new ProductA());
-        cout << "Neues Produkt von Produkt A wurde erzeugt." << endl;
     }else if(type == 2){
+        cout << "Neues Produkt von Maschine B erzeugen." << endl;
         parent->addProduct(new ProductB());
-        cout << "Neues Produkt von Produkt B wurde erzeugt." << endl;
     }
 }
 
