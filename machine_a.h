@@ -6,8 +6,8 @@
 class MachineA : public Machine{
 public:
     //constructor
-    //using Machine::Machine;
-    MachineA(Factory* parent) : Machine(parent){};
+    using Machine::Machine;
+    //MachineA(Factory* parent) : Machine(parent){};//brauchen wir nicht durch setFactory funktion
 
     virtual void tick() override;
 };

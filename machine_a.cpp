@@ -11,7 +11,7 @@ void MachineA::tick() {
     if(tempFailer == 0){
         int x = 1, y = 100;
         int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
-        //int rand_num = 20;//for testing
+        //int rand_num = 7;//for testing
         cout << rand_num << endl;
 
         if (rand_num > 0 && rand_num <= 15){

@@ -60,14 +60,11 @@ unsigned Factory::getProductBCount(){
 }
 
 void Factory::run(unsigned iterations){
-    MachineA maschine1(this);//bräuchten wir den Parent gar nicht
+    MachineA maschine1;
     addMachine(&maschine1);
     maschine1.setFactory(this);
 
-    //addMachine(new MachineA(this));
-    //addMachine(new MachineA(this));
-
-    MachineB maschine2(this);//bräuchten wir den Parent gar nicht
+    MachineB maschine2;
     addMachine(&maschine2);
     maschine2.setFactory(this);
 

@@ -16,7 +16,7 @@ protected:
 public:
     //using default constructor
     //constructor
-    Machine(Factory* parent) : parent(parent){};
+    Machine(){};
 
 
     //destructor
