@@ -6,16 +6,20 @@
 #include <vector>
 #include <unistd.h>
 
+using namespace std;
+
 unsigned Factory::addMachine(Machine* m){
-    int tempID = machineID;
-    machines.insert({machineID++,m});
+    int tempID = machineID++;
+    machines.insert({tempID,shared_ptr<Machine>(m)});
+    m->setFactory(this);
     return tempID;
 }
 
 Machine* Factory::getMachine(unsigned id){
+    //oder mit machines.at(id) (at checkt ob es den key gibt ansonsten wirft er exception)
     if(machines.find(id) != machines.end()){
         //nachschauen ob der key bereits existiert
-        return machines[id];
+        return machines[id].get(); //.get() gibt raw pointer von smart pointer retour
     }else{
         throw NoMachineFoundException("Keine Maschine mit dieser ID vorhanden.");
     }
@@ -33,12 +37,14 @@ void Factory::deleteMachine(unsigned id){
 void Factory::addProduct(Product* p){
     if(p->getType() == 1){
         //Produkt in das passende Lager sortieren
-        storageProductsA.push_back(p);
+        //fall vector einen Pointer von ProductA* erwartet - downcast machen wie folgt:
+        //ProductA* pa = (ProductA*)p;
+        storageProductsA.push_back(shared_ptr<Product>(p));
         getProductACount();
 
     }else if(p->getType() == 2){
         //Produkt in das passende Lager sortieren
-        storageProductsB.push_back(p);
+        storageProductsB.push_back(shared_ptr<Product>(p));
         getProductBCount();
     }else{
         throw MachineFailureException("Unbekanntes Produkt.");
@@ -60,46 +66,48 @@ unsigned Factory::getProductBCount(){
 }
 
 void Factory::run(unsigned iterations){
-    MachineA maschine1;
-    addMachine(&maschine1);
-    maschine1.setFactory(this);
-
-    MachineB maschine2;
-    addMachine(&maschine2);
-    maschine2.setFactory(this);
-
-
     unsigned int i = 1;
-    int tempcount = 0;
-    while(1){
-        cout << "iterations: " << iterations << endl;
-
-        //map durch iterieren
-        for (auto it = machines.begin(); it != machines.end(); it++){
+    //int tempcount = 0;
+    while(iterations >= 0){
+        //cout << "iterations: " << iterations << endl;
+        unsigned tempId = 0;
+    try{
+        for(auto m = machines.begin(); m != machines.end(); m++){
             try{
-                it->second->tick();
-            }
-            catch (MachineFailureException& e){
+                tempId = m->first;
+                m->second->tick();
+            } catch (MachineFailureException& e){
                 cout << e.what() << endl;
-            }
-            catch (MachineExplosionException& e){
+            }catch(UnknownProductException& e){
                 cout << e.what() << endl;
-                deleteMachine(it->first);
             }
         }
+    } catch (MachineExplosionException& e){
+        cout << e.what() << endl;
+        deleteMachine(tempId);
+    }
+    //Achtung Stolperfalle: wo try ... catches sind (auf welcher Ebene)
+
+        //andere Variante um durch map zu iterieren:
+        /*for(auto m : machines){
+        try{
+            tempId = m.first;
+            m.second->tick();
+        }catch(){}...*/
+
         cout << "-----" << endl;
 
 
         if(iterations == i){
             break;
-        }else if(iterations == 0){
+        }/*else if(iterations == 0){
             cout << "tempcount: " << tempcount << endl;
-            if(tempcount >= 10){
+            if(tempcount >= 10){ //sicherheitsabbruch
                 break;
             }
             tempcount ++;
             continue;
-        }
+        }*/
         iterations--;
         sleep(2);//sleep for 2 seconds
     }

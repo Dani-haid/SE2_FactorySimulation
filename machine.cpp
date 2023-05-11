@@ -3,6 +3,14 @@
 #include "product_b.h"
 #include "factory.h"
 
+bool Machine::checkMachineFailure(){
+    if(failureIndex > 0){
+        failureIndex--;
+        return false;
+    }
+    return true;
+};
+
 void Machine::createProduct(int type){
     //cout << "neues produkt erzeugen" << endl;
     if(type == 1){

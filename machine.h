@@ -10,19 +10,18 @@ class Product;
 
 class Machine {
 protected:
-    Factory* parent;
+    Factory* parent = nullptr; //mit nullpointer initialisieren
     int failureIndex = 0;
 
 public:
     //using default constructor
     //constructor
-    Machine(){};
-
+    //Machine(){};
 
     //destructor
-    ~Machine(){
-        cout << "Destructor Machine " << endl;
-    };
+    virtual ~Machine(){};
+
+    bool checkMachineFailure();
 
     virtual void tick() = 0;
 

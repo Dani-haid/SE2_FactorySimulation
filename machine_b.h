@@ -9,6 +9,11 @@ public:
     //constructor
     using Machine::Machine;
 
+    //destructor
+    virtual ~MachineB(){
+        cout << "Destructor MachineB" << endl;
+    };
+
     virtual void tick() override;
 };
 

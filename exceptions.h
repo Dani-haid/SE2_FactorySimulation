@@ -1,7 +1,7 @@
 #ifndef INC_02_SE2_FACTORYSIMULATION_EXCEPTIONS_H
 #define INC_02_SE2_FACTORYSIMULATION_EXCEPTIONS_H
 
-#include <stdexcept>
+#include <stdexcept> //für runtime error
 
 using namespace std;
 
@@ -31,14 +31,24 @@ public:
 };
 
 class MachineFailureException:public FactoryException{
+public:
     using FactoryException::FactoryException;
+    //oder
+    //MachineFailureException(): FactoryException("Eigene Fehlermeldung."){};
 };
 
 class MachineExplosionException:public FactoryException{
+public:
     using FactoryException::FactoryException;
 };
 
 class NoMachineFoundException:public FactoryException{
+public:
+    using FactoryException::FactoryException;
+};
+
+class UnknownProductException:public FactoryException{
+public:
     using FactoryException::FactoryException;
 };
 

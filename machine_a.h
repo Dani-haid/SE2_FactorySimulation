@@ -9,6 +9,11 @@ public:
     using Machine::Machine;
     //MachineA(Factory* parent) : Machine(parent){};//brauchen wir nicht durch setFactory funktion
 
+    //destructor
+    virtual ~MachineA(){
+        cout << "Destructor MachineA" << endl;
+    };
+
     virtual void tick() override;
 };
 

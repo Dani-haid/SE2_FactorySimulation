@@ -13,7 +13,10 @@ public:
         this->type = 1;
     };
 
-    ProductB(int type): type(type){};
+    //destructor
+    virtual ~ProductB(){
+        cout << "Destructor ProductB" << endl;
+    };
 
     virtual int getType() override;
 };

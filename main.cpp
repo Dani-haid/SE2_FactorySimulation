@@ -13,7 +13,10 @@ int main() {
 
     Factory meineFabrik;
     //meineFabrik.run(0);
-    meineFabrik.run(2);
+    meineFabrik.addMachine(new MachineA());
+    meineFabrik.addMachine(new MachineB());
+
+    meineFabrik.run(5);
 
     return 0;
 }

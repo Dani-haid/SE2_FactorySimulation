@@ -6,34 +6,21 @@
 #include "machine.h"
 #include "product_a.h"
 #include "product_b.h"
+#include <memory>
+
 
 class Factory {
 protected:
-    map<int, Machine*> machines;
-    vector<Product*> storageProductsA;
-    vector<Product*> storageProductsB;
+    map<int, shared_ptr<Machine>> machines;
+    vector<shared_ptr<Product>> storageProductsA;
+    vector<shared_ptr<Product>> storageProductsB;
 
     int machineID = 0;
 
 public:
+    //destructor
     ~Factory(){
         cout << "Destructor Factory" << endl;
-
-       /* cout << storageProductsA.size() << endl;
-
-for(int i = 0; i < storageProductsA.size(); i++){
-    cout << storageProductsA.size() << endl;
-    storageProductsA.erase(storageProductsA.begin()+0);
-    std::cout << i << ", ";
-}
-
-
-        for(auto it = machines.begin(); it != machines.end(); it++){
-            deleteMachine(it->first);
-        }
-        */
-
-
     };
 
     unsigned addMachine(Machine* m);
